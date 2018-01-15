@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
@@ -11,8 +13,8 @@ index = 1
 index = int(index)
 
 links = []
-images = []
 headings = []
+images = []
 
 print("------------------------------------------------")
 print("WELCOME TO \"MEDIUM\" DESIGNER...BLAH - TROLL CLUB")
@@ -96,7 +98,7 @@ subtractor = 1
 
 with myFile:
 
-    myFields = ['Headings', 'Links']
+    myFields = ['Headings', 'Links', 'Images']
     writer = csv.DictWriter(myFile, fieldnames=myFields)
     writer.writeheader()
 
@@ -107,11 +109,27 @@ with myFile:
         heading = heading.encode('utf-8')
         print("HEADING: " + heading)
         headings.append(heading)
+
+        # if there is a main image, scrape it, if not give it a stockimage
+        try:
+            image = d.find_element_by_class_name('progressiveMedia-image').get_attribute("src").encode('utf-8')
+            print "Successfully found main image"
+            print image
+            # images.append(image)
+        except:
+            print "No main image link found"
+            image = 'http://www.ropeworksgear.com/site/skin/img/no-image.jpg'
+            # images.append(image)\
+            pass
+        finally:
+            images.append(image)
+
+        
         print("\n"+str(len(links) - subtractor)+"links left to visit\n")
 
         subtractor+=1
 
-        writer.writerow({'Headings': heading, 'Links': str(indiv_link)})
+        writer.writerow({'Headings': heading, 'Links': str(indiv_link), 'Images': str(image)})
 
 print"----------------------"
 print"saved data in data.csv\n"
