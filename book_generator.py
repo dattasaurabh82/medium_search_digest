@@ -22,6 +22,7 @@ with open(csvfilename) as myFile:
 
         print(row['Links'])
         print(row['Headings'])
+        print(row['Images'])
 
         qr = pyqrcode.create(str(row['Links']), error='L')
         qr.png(str(index)+'.png', scale=5, module_color=[17, 35, 80], background=[0xff, 0xff, 0xcc])

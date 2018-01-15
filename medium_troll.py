@@ -2,6 +2,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver import ActionChains
 import time
 import random
 import sys
@@ -105,26 +106,43 @@ with myFile:
     for indiv_link in links:
         print("LINK: " + indiv_link)
         d.get(indiv_link)
-        heading = d.title
+
+
+        heading = d. 
         heading = heading.encode('utf-8')
         print("HEADING: " + heading)
         headings.append(heading)
 
+
+
         # if there is a main image, scrape it, if not give it a stockimage
         try:
             image = d.find_element_by_class_name('progressiveMedia-image').get_attribute("src").encode('utf-8')
-            print "Successfully found main image"
+            print "Successfully found main image link"
             print image
             # images.append(image)
         except:
             print "No main image link found"
             image = 'http://www.ropeworksgear.com/site/skin/img/no-image.jpg'
-            # images.append(image)\
+            # images.append(image)
             pass
         finally:
             images.append(image)
 
-        
+            # d.get(str(image))
+            # iml = d.find_element_by_tag_name('img')
+            # ac = ActionChains(d)
+            # ac.move_to_element(iml)
+            # ac.context_click(iml)
+            # time.sleep(2)
+            # ac.send_keys(Keys.ARROW_DOWN)
+            # ac.send_keys(Keys.ARROW_DOWN)
+            # ac.send_keys(Keys.ARROW_UP)
+            # ac.send_keys(Keys.ARROW_UP)
+            # ac.send_keys(Keys.ENTER)
+            # ac.send_keys(Keys.ENTER)
+            # ac.perform()
+            
         print("\n"+str(len(links) - subtractor)+"links left to visit\n")
 
         subtractor+=1
