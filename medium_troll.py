@@ -108,7 +108,7 @@ with myFile:
         d.get(indiv_link)
 
 
-        heading = d. 
+        heading = d.title 
         heading = heading.encode('utf-8')
         print("HEADING: " + heading)
         headings.append(heading)
